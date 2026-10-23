@@ -1,0 +1,26 @@
+version: '3'
+
+tasks:
+  setup:
+    desc: 의존성 설치, .dev.vars 생성, 로컬 D1 마이그레이션
+    cmds:
+      - pnpm install
+      - test -f .dev.vars || cp .dev.vars.example .dev.vars
+      - pnpm db:migrate:local
+
+  dev:
+    desc: mock OIDC 서버와 개발 서버 실행 (http://localhost:5185)
+    cmds:
+      - pnpm oidc:up
+      - pnpm dev
+
+  test:
+    desc: 테스트와 타입 검사
+    cmds:
+      - pnpm test
+      - pnpm typecheck
+
+  build:
+    desc: 빌드
+    cmds:
+      - pnpm build

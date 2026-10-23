@@ -1,0 +1,42 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "spec-hub",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "not_found_handling": "single-page-application",
+    // SPA 경로가 아닌 요청은 정적 자산보다 워커가 먼저 받는다.
+    "run_worker_first": [
+      "/api/*",
+      "/auth/*",
+      "/mcp",
+      "/mcp/*",
+      "/authorize",
+      "/oauth/*",
+      "/.well-known/*"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "spec-hub",
+      // 원격 DB 를 만들면 `wrangler d1 create spec-hub` 이 출력한 id 로 바꾼다. 로컬 개발은 이 값과 무관하다.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      // workers-oauth-provider 가 MCP 클라이언트 · 토큰 · 동의 상태를 저장한다.
+      "binding": "OAUTH_KV",
+      "id": "00000000000000000000000000000000"
+    }
+  ],
+  "vars": {
+    "PUBLIC_ORIGIN": "http://localhost:5185",
+    "OIDC_ISSUER": "http://localhost:9400/entra",
+    "OIDC_CLIENT_ID": "spec-hub-local",
+    "OIDC_ALLOWED_TENANT_ID": "local-tenant"
+  }
+}

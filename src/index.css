@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', sans-serif;
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-ink: #202b3d;
+  --color-ink-soft: #3f4c60;
+  --color-ink-muted: #647186;
+  --color-ink-faint: #738095;
+  --color-border: #e3e8ef;
+  --color-border-strong: #cbd4e0;
+  --color-accent: #365fbc;
+  --color-accent-deep: #294b9a;
+  --color-accent-tint: #edf2fd;
+  --color-danger: #bc3542;
+}
+
+@layer base {
+  html { color-scheme: light; }
+  body { margin: 0; background: var(--color-bg); color: var(--color-ink); font-family: var(--font-sans); font-size: 15px; line-height: 1.6; }
+  button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+  button:not(:disabled), select:not(:disabled) { cursor: pointer; }
+  :where(button, a, input, select, textarea, summary):focus-visible { outline: 3px solid #8faeea; outline-offset: 3px; }
+  :where(input, select, textarea):disabled { background: #f4f6f9; color: var(--color-ink-muted); cursor: not-allowed; }
+  :where(input, select, textarea) { min-width: 0; max-width: 100%; }
+  select { min-height: 40px; }
+  input[type='checkbox'] { width: 16px; height: 16px; accent-color: var(--color-accent); }
+  textarea { resize: vertical; }
+  h1, h2, h3, p, code { overflow-wrap: anywhere; }
+  h1 { letter-spacing: -0.035em; }
+  ::selection { background: #dbe7ff; }
+}
+
+@layer components {
+  .button-link { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--color-border-strong); border-radius: 8px; background: white; padding: 8px 14px; color: var(--color-ink-soft); font-size: 14px; font-weight: 600; line-height: 1.4; text-align: center; transition: background 150ms, border-color 150ms; }
+  .button-link:hover { background: #f5f7fb; }
+  .button-link-primary { border-color: var(--color-accent); background: var(--color-accent); color: white; }
+  .button-link-primary:hover { background: var(--color-accent-deep); }
+  .form-control { min-height: 42px; width: 100%; border: 1px solid var(--color-border-strong); border-radius: 8px; background: white; padding: 9px 12px; font-size: 14px; line-height: 1.6; transition: border-color 150ms, box-shadow 150ms; }
+  .form-control::placeholder { color: var(--color-ink-faint); }
+  .form-control:focus { border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-tint); outline: none; }
+  .page-title { font-size: clamp(24px, 2.3vw, 30px); font-weight: 700; line-height: 1.35; }
+  .page-header { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .section-card { min-width: 0; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); box-shadow: 0 1px 2px #202b3d03; }
+  .nav-item { display: flex; min-height: 40px; align-items: center; gap: 10px; border-radius: 8px; padding: 8px 10px; font-size: 14px; color: var(--color-ink-soft); }
+  .nav-item:hover { background: #f1f4f9; }
+  .nav-item[aria-current='page'] { background: var(--color-accent-tint); color: var(--color-accent-deep); font-weight: 600; }
+  .spec-markdown { color: var(--color-ink-soft); font-size: 15px; line-height: 1.85; overflow-wrap: anywhere; }
+  .spec-markdown :where(h1,h2,h3,h4) { color: var(--color-ink); line-height: 1.5; }
+  .spec-markdown :where(pre) { max-width: 100%; overflow-x: auto; white-space: pre; font-size: 13px; }
+  .spec-markdown :where(table) { display: block; max-width: 100%; overflow-x: auto; font-size: 14px; }
+  .spec-markdown :where(img) { border-radius: 8px; }
+  .spec-markdown :where(a) { color: var(--color-accent); }
+  .spec-markdown :where(code):not(pre code) { overflow-wrap: anywhere; }
+  .mobile-navigation { position: fixed; inset: 0 auto 0 0; margin: 0; height: 100dvh; max-height: 100dvh; width: min(340px, calc(100vw - 32px)); max-width: none; padding: 0; border: none; background: white; color: var(--color-ink); }
+  .mobile-navigation::backdrop { background: #17243d70; }
+  @media (max-width: 639px) {
+    .form-control { font-size: 16px; }
+  }
+}

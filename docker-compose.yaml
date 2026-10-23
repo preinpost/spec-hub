@@ -1,0 +1,8 @@
+# 로컬 전용 mock OIDC 서버. Microsoft Entra ID 대신 로그인 화면을 띄운다.
+services:
+  oidc:
+    image: ghcr.io/navikt/mock-oauth2-server:2.1.10
+    ports:
+      - "9400:8080"
+    environment:
+      JSON_CONFIG: '{"interactiveLogin": true}'

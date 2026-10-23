@@ -1,0 +1,5 @@
+# 로컬 개발용 시크릿. 이 파일을 .dev.vars 로 복사한다 (.dev.vars 는 커밋하지 않는다).
+
+# 로컬 mock OIDC 서버(docker compose)는 아무 값이나 받는다.
+# 실제 Entra 앱으로 붙을 때는 앱 등록 → 인증서 및 암호 에서 만든 클라이언트 암호를 넣는다.
+OIDC_CLIENT_SECRET=local-secret
